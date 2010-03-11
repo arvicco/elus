@@ -20,8 +20,8 @@ so no progress on this tool is to be expected.
 
 == SYNOPSIS
 
-$ gem install elus
-$ elus
+  $ gem install elus
+  $ elus
 
 ... Follow the prompts
 

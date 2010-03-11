@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "elus"
-    gem.summary = %Q{New project elus}
-    gem.description = %Q{New project elus}
+    gem.summary = %Q{This is a support tool for winning SpaceRangers:Elus}
+    gem.description = %Q{This is a support tool for winning SpaceRangers:Elus}
     gem.email = "arvitallian@gmail.com"
     gem.homepage = "http://github.com/arvicco/elus"
     gem.authors = ["arvicco"]
