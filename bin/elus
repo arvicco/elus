@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.join(File.dirname(__FILE__),".." ,"lib" )
+require 'elus'
+
+solver = Elus::Solver.new(STDIN,STDOUT)
+solver.start(Elus::Turn3Generator.new)
+solver.input_state
+solver.make_moves

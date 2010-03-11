@@ -1,16 +1,29 @@
 = elus
 
-Description goes here.
+    by: Arvicco
+    url: http://github.com/arvicco/win
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+== DESCRIPTION
+This is a support tool for winning SpaceRangers:Elus. 
+
+== SUMMARY
+
+Elus is a little game-inside-game quest that pops up in SpaceRangers game.
+It is notoriosly difficult to crack manually, but easy with Ruby script.
+Instead of writing quik-and-dirty permutations script that would be sufficient,
+I tried to develop this tool in a "proper" BDD way while reading 'The RSpec Book'.
+So, in effect Elus is a replacement for Codebreaker example which I found boring. ;)
+
+By all means, use it if you're stuck with Elus quest and add new functionality 
+to it (like GUI and stuff) if you need it. I'm done with the quest and Rspec book, 
+so no progress on this tool is to be expected.
+
+== SYNOPSIS
+
+$ gem install elus
+$ elus
+
+... Follow the prompts
 
 == Copyright
 

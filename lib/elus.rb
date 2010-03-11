@@ -1,0 +1,5 @@
+require 'elus/game'
+require 'elus/generator'
+require 'elus/piece'
+require 'elus/rule'
+require 'elus/solver'
