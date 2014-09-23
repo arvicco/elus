@@ -1,8 +1,5 @@
 require File.join(File.dirname(__FILE__), ".." ,"spec_helper" )
 
-module Elus
-  include ElusTest
-  
   def generator_stub
     stub('generator', :generate_rules => [])
   end
@@ -13,6 +10,7 @@ module Elus
     end  
   end
 
+module Elus
   describe Game do
     before :each do
        @free = [ Piece.create("BGC"),
@@ -55,13 +53,13 @@ module Elus
       it "should generate appropriate hints about Rules" do
         game = Game.new(:free=>@free, :board=>@board, :generator=>Turn1Generator.new)
         should_be_in game.hint,  'Rules(2):',
-                                  'If last Piece is Any Piece, Diamond Piece is next',
+                                  'If last Piece is Any Piece, Lozenge Piece is next',
                                   'If last Piece is Any Piece, Same shape Piece is next'
       end
       it "should generate appropriate hints about Moves" do
         game = Game.new(:free=>@free, :board=>@board, :generator=>Turn1Generator.new)
         should_be_in game.hint,  'Moves(1):',
-                                 'Small Green Diamond(2)'
+                                 'Small Green Lozenge(2)'
       end
     end
     context 'making moves' do
@@ -76,7 +74,7 @@ module Elus
         piece = Piece.create('SGD')
         game.move(piece, @new)
         game.state.should =~ Regexp.new('Free:\s'+@new.map(&:name).join('\s'))
-        game.hint.should =~ /Moves\(1\):\sBig Yellow Diamond/
+        game.hint.should =~ /Moves\(1\):\sBig Yellow Lozenge/
       end
       it 'should not add moved piece to board upon wrong move' do
         game = Game.new(:free=>@free, :board=>@board, :generator=>Turn1Generator.new)
@@ -89,7 +87,7 @@ module Elus
         piece = Piece.create('BGC')
         game.move(piece)
         game.state.should_not =~ Regexp.new('Free:[\s.]*'+piece.name+'[\s.]Board')
-        game.hint.should =~ /Moves\(1\):\sSmall Green Diamond/
+        game.hint.should =~ /Moves\(1\):\sSmall Green Lozenge/
       end
     end
     context 'predicate testing' do

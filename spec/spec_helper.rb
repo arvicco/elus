@@ -4,7 +4,7 @@ $LOAD_PATH << File.join(File.dirname(__FILE__),".." ,"lib" )
 #require 'spec'
 require 'elus'
 
-module ElusTest
+#module ElusTest
   PIECE_CHARS = '01=!.'
   NONDOT_CHARS = '01!='
   
@@ -38,9 +38,7 @@ module ElusTest
     (p1 < p2).should be_false
   end
   
-
-
-  BYD = 'Big Yellow Diamond'
+  BYD = 'Big Yellow Lozenge'
   WRONG_RULES = [
     ["B", 'BY', 'BSYC'], 
     ['BYG', 'BYCD'], 
@@ -54,10 +52,10 @@ module ElusTest
     ['...', '.!.'] => 'If last Piece is Any Piece, Different color Piece is next',
     ['...', '..='] => 'If last Piece is Any Piece, Same shape Piece is next', 
     ['...', '1..'] => 'If last Piece is Any Piece, Big Piece is next', 
-    ['...', '.!1'] => 'If last Piece is Any Piece, Different color Diamond Piece is next',
-    ['..1', '1..', '0..'] => 'If last Piece is Diamond Piece, Big Piece is next, otherwise Small Piece is next', 
+    ['...', '.!1'] => 'If last Piece is Any Piece, Different color Lozenge Piece is next',
+    ['..1', '1..', '0..'] => 'If last Piece is Lozenge Piece, Big Piece is next, otherwise Small Piece is next', 
     ['1..', '.0.', '.1.'] => 'If last Piece is Big Piece, Green Piece is next, otherwise Yellow Piece is next',
-    ['..1', '=..', '!..'] => 'If last Piece is Diamond Piece, Same size Piece is next, otherwise Different size Piece is next',
+    ['..1', '=..', '!..'] => 'If last Piece is Lozenge Piece, Same size Piece is next, otherwise Different size Piece is next',
     ['.1.', '..!', '0..'] => 'If last Piece is Yellow Piece, Different shape Piece is next, otherwise Small Piece is next'
     }
 
@@ -70,19 +68,19 @@ module ElusTest
         '0..' => 'Small',
         '.1.' => 'Yellow',
         '.0.' => 'Green',
-        '..1' => 'Diamond',
+        '..1' => 'Lozenge',
         '..0' => 'Circle',
         '11.' => 'Big Yellow',
         '10.' => 'Big Green',
         '01.' => 'Small Yellow',
         '00.' => 'Small Green',
-        '1.1' => 'Big Diamond',
+        '1.1' => 'Big Lozenge',
         '1.0' => 'Big Circle',
-        '0.1' => 'Small Diamond',
+        '0.1' => 'Small Lozenge',
         '0.0' => 'Small Circle',
-        '.11' => 'Yellow Diamond',
+        '.11' => 'Yellow Lozenge',
         '.10' => 'Yellow Circle',
-        '.01' => 'Green Diamond',
+        '.01' => 'Green Lozenge',
         '.00' => 'Green Circle',
         '!..' => 'Different size',
         '=..' => 'Same size',
@@ -102,10 +100,10 @@ module ElusTest
         '.!=' => 'Different color Same shape',
         '.=!' => 'Same color Different shape',
         '.==' => 'Same color Same shape',
-        '!!1' => 'Different size Different color Diamond',
-        '!=1' => 'Different size Same color Diamond',
-        '=!1' => 'Same size Different color Diamond',
-        '==1' => 'Same size Same color Diamond',
+        '!!1' => 'Different size Different color Lozenge',
+        '!=1' => 'Different size Same color Lozenge',
+        '=!1' => 'Same size Different color Lozenge',
+        '==1' => 'Same size Same color Lozenge',
         '!1!' => 'Different size Yellow Different shape',
         '!1=' => 'Different size Yellow Same shape',
         '=1!' => 'Same size Yellow Different shape',
@@ -132,9 +130,9 @@ module ElusTest
         '!g0' => 'Different size Green Circle',
         '0!0' => 'Small Different color Circle',
         '=10' => 'Same size Yellow Circle',
-        '!0d' => 'Different size Green Diamond',
+        '!0d' => 'Different size Green Lozenge',
         '!00' => 'Different size Green Circle',
-        '=01' => 'Same size Green Diamond',
+        '=01' => 'Same size Green Lozenge',
         '=gc' => 'Same size Green Circle',
         '0y!' => 'Small Yellow Different shape',
         '00=' => 'Small Green Same shape',
@@ -142,41 +140,41 @@ module ElusTest
         's1=' => 'Small Yellow Same shape',
         }
   CODES = {
-   "BYR"=>BYD,
+   "BYL"=>BYD,
    "BYD"=>BYD,
-   "bYR"=>BYD,
-   "ByR"=>BYD,
-   "BYr"=>BYD,
-   "byR"=>BYD,
-   "bYr"=>BYD,
-   "byr"=>BYD,
+   "bYL"=>BYD,
+   "ByL"=>BYD,
+   "BYl"=>BYD,
+   "byL"=>BYD,
+   "bYl"=>BYD,
+   "byl"=>BYD,
    "byd"=>BYD,
    "111"=>BYD,
    "bdy"=>BYD,
    "B YD"=>BYD,
    "dyb"=>BYD,
-   "bY R"=>BYD,
-   "B y R"=>BYD,
-   " b y R "=>BYD,
-   "bYr "=>BYD,
-   " byr"=>BYD,
+   "bY L"=>BYD,
+   "B y L"=>BYD,
+   " b y L "=>BYD,
+   "bYl "=>BYD,
+   " byl"=>BYD,
    "1 1 1"=>BYD,
-   "SYR"=>"Small Yellow Diamond",
-   "SYD"=>"Small Yellow Diamond",
-   "syr"=>"Small Yellow Diamond",
-   "syd"=>"Small Yellow Diamond",
-   "011"=>"Small Yellow Diamond",
-   "dys"=>"Small Yellow Diamond",
-   "BGR"=>"Big Green Diamond",
-   "BGD"=>"Big Green Diamond",
-   "bgr"=>"Big Green Diamond",
-   "bgd"=>"Big Green Diamond",
-   "BgR"=>"Big Green Diamond",
-   "101"=>"Big Green Diamond",
-   "SGR"=>"Small Green Diamond",
-   "SGD"=>"Small Green Diamond",
-   "sgd"=>"Small Green Diamond",
-   "001"=>"Small Green Diamond",
+   "SYL"=>"Small Yellow Lozenge",
+   "SYD"=>"Small Yellow Lozenge",
+   "syl"=>"Small Yellow Lozenge",
+   "syd"=>"Small Yellow Lozenge",
+   "011"=>"Small Yellow Lozenge",
+   "dys"=>"Small Yellow Lozenge",
+   "BGL"=>"Big Green Lozenge",
+   "BGD"=>"Big Green Lozenge",
+   "bgl"=>"Big Green Lozenge",
+   "bgd"=>"Big Green Lozenge",
+   "BgL"=>"Big Green Lozenge",
+   "101"=>"Big Green Lozenge",
+   "SGL"=>"Small Green Lozenge",
+   "SGD"=>"Small Green Lozenge",
+   "sgd"=>"Small Green Lozenge",
+   "001"=>"Small Green Lozenge",
    "BYC"=>"Big Yellow Circle",
    "byc"=>"Big Yellow Circle",
    "byC"=>"Big Yellow Circle",
@@ -195,4 +193,4 @@ module ElusTest
    "SGC"=>"Small Green Circle",
    "sgc"=>"Small Green Circle",
    "000"=>"Small Green Circle" }
-end
+#end

@@ -1,8 +1,19 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << File.join(File.dirname(__FILE__),".." ,"lib" )
 require 'elus'
-
 solver = Elus::Solver.new(STDIN,STDOUT)
-solver.start(Elus::Turn3Generator.new)
+
+round = ARGV[0] || "1"
+
+puts "Solving Elus round #{round}"
+
+case round 
+ when "1"
+  solver.start(Elus::Turn1Generator.new)
+ when "2"	
+  solver.start(Elus::Turn2Generator.new)
+ when "3"	
+  solver.start(Elus::Turn3Generator.new)
+ end 
 solver.input_state
 solver.make_moves

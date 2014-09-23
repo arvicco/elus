@@ -1,35 +1,34 @@
 require File.join(File.dirname(__FILE__), ".." ,"spec_helper" )
 
-module Elus
-  include ElusTest
-  
-  def create_solver(options={})
-    @stdout = options[:stdout] || mock('stdout').as_null_object
-    @stdin = options[:stdin] || mock('stdin')
-    @stdin.stub(:gets).and_return(*options[:input]) if options[:input]
-    @solver = Solver.new(@stdin, @stdout)
-  end
-  
-  def start_solver(options={})
-    create_solver(options)
-    @solver.start(options[:generator] || stub('generator', :generate_rules => []))
-  end
+def create_solver(options={})
+  @stdout = options[:stdout] || mock('stdout').as_null_object
+  @stdin = options[:stdin] || mock('stdin')
+  @stdin.stub(:gets).and_return(*options[:input]) if options[:input]
+  @solver = Elus::Solver.new(@stdin, @stdout)
+end
 
-  # sets expectation for stdout to receive strictly ordered sequence of exact messages
-  def stdout_should_receive(*messages)
-    messages.each do |message|
-      @stdout.should_receive(:puts).with(message).once.ordered
-    end
-  end
+def start_solver(options={})
+  create_solver(options)
+  @solver.start(options[:generator] || stub('generator', :generate_rules => []))
+end
 
-  # sets expectation for stdout to receive message(s) containing all of the patterns (unordered)
-  def stdout_should_include(*patterns)
-    patterns.each do |pattern|
-      re = Regexp === pattern ? pattern : Regexp.new(Regexp.escape(pattern))
-      @stdout.should_receive(:puts).with(re).at_least(:once)
-    end
+# sets expectation for stdout to receive strictly ordered sequence of exact messages
+def stdout_should_receive(*messages)
+  messages.each do |message|
+    @stdout.should_receive(:puts).with(message).once.ordered
   end
+end
+
+# sets expectation for stdout to receive message(s) containing all of the patterns (unordered)
+def stdout_should_include(*patterns)
+  patterns.each do |pattern|
+    re = Regexp === pattern ? pattern : Regexp.new(Regexp.escape(pattern))
+    @stdout.should_receive(:puts).with(re).at_least(:once)
+  end
+end
  
+module Elus
+  
   describe Solver do  
     context 'starting up' do
       it 'should send a welcome message' do
@@ -150,10 +149,10 @@ module Elus
         start_solver(:generator => Turn1Generator.new, :input => ["BGC\n", "sgd\n", "syc\n", "BYD\n", "SYD\n", "BGD\n", "\n"])
         stdout_should_include \
 "Rules(2):
-If last Piece is Any Piece, Diamond Piece is next
+If last Piece is Any Piece, Lozenge Piece is next
 If last Piece is Any Piece, Same shape Piece is next
 Moves(1):
-Small Green Diamond(2)"
+Small Green Lozenge(2)"
         @solver.input_state
         @solver.make_move
       end
@@ -179,7 +178,7 @@ Small Green Diamond(2)"
         start_solver(:generator => Turn1Generator.new, :input => ["BGC\n", "sgd\n", "syc\n", "BYD\n", "SYD\n", "BGD\n", "\n"])
         @solver.input_state 
         @stdin.stub(:gets).and_return("BGD","N","SYC","SYD","BYC")
-        stdout_should_include("Make your move:", "Wrong move (not in free set): Big Green Diamond")
+        stdout_should_include("Make your move:", "Wrong move (not in free set): Big Green Lozenge")
         @solver.make_move
       end
 
@@ -187,7 +186,7 @@ Small Green Diamond(2)"
         start_solver(:generator => Turn1Generator.new, :input => ["BGC\n", "sgd\n", "syc\n", "BYD\n", "SYD\n", "BGD\n", "\n"])
         @solver.input_state 
         @stdin.stub(:gets).and_return("SGD","Y","SYC","SYD","BYC")
-        stdout_should_include("Make your move:", "You moved: Small Green Diamond", "Was the move right(Y/N)?:", "Great, now enter new Free set:")
+        stdout_should_include("Make your move:", "You moved: Small Green Lozenge", "Was the move right(Y/N)?:", "Great, now enter new Free set:")
         @solver.make_move
       end
 

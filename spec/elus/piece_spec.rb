@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), ".." ,"spec_helper" )
 
 module Elus
-  include ElusTest
+  #include ElusTest
 
   describe Piece do
     context "creating" do
@@ -38,7 +38,7 @@ module Elus
       it "should drop irrelevant characters from code" do
         Piece.create('b y d ').name.should == BYD
         Piece.create('yfdzb').name.should == BYD
-        Piece.create('AEFHIJKLMNOPQTUVWXZaefhijklmnopqtuvwxz byd').name.should == BYD
+        Piece.create('AEFHIJKLMNOPQTUVWXZaefhijkmnopqtuvwxz byd').name.should == BYD
         Piece.create('byd23456789~@#$%^&*()_+-?><{}[],|/`').name.should == BYD
       end
       
@@ -47,8 +47,8 @@ module Elus
         Piece.create('DDyb').name.should == BYD
         Piece.create('AEFHIJbbbbbbbbbbbbbbbbbbbbyd').name.should == BYD
         Piece.create('byddd').name.should == BYD
-        Piece.create('byrd').name.should == BYD
-        Piece.create('bydrrdrrrrdr').name.should == BYD
+        Piece.create('byld').name.should == BYD
+        Piece.create('bydlrdrrrrdr').name.should == BYD
       end
       
       it "should sort code letter if they are given in wrong order" do

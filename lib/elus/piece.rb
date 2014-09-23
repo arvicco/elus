@@ -1,7 +1,7 @@
 module Elus
   class Piece
     # These constants are used for translating between the external string representation of a Game and the internal representation.
-    VALID = "01sbgycdr=!."                    # Valid (meaningful) chars in code string (downcase)
+    VALID = "01sbgycdl=!."                    # Valid (meaningful) chars in code string (downcase)
     SORT = "01stghcdd=!."                     # Special unique chars good for sorting (B)ig->(T)itanic, (Y)ellow->(H)ellow, (R)hombus->(D)iamond
     FINAL = "010101011=!."                    # Final (place-dependent) representation as 0/1 digits
     INVALID = Regexp.new "[^#{VALID}]"        # Regexp matching all non-valid chars
@@ -9,7 +9,7 @@ module Elus
     # Names for Piece characteristics (based on code)
     NAMES = [ {'0'=>'Small', '1'=>'Big', '='=>'Same size', '!'=>'Different size'},
     {'0'=>'Green', '1'=>'Yellow', '='=>'Same color', '!'=>'Different color'},
-    {'0'=>'Circle', '1'=>'Diamond', '='=>'Same shape', '!'=>'Different shape'}  ]
+    {'0'=>'Circle', '1'=>'Lozenge', '='=>'Same shape', '!'=>'Different shape'}  ]
     
     attr_reader :code
     private_class_method :new
@@ -47,7 +47,7 @@ module Elus
     
     # Returns full text name of this Piece
     def name
-     (0..2).map {|i| NAMES[i][@code[i]]}.compact.join(' ').
+     (0..2).map {|i| NAMES[i][@code.split('')[i]]}.compact.join(' ').
       gsub(Regexp.new('^$'), 'Any').
       gsub(Regexp.new('Same size Same color Same shape'), 'All Same').
       gsub(Regexp.new('Different size Different color Different shape'), 'All Different')
