@@ -20,11 +20,19 @@ so no progress on this tool is to be expected.
 
 == SYNOPSIS
 
+You need Ruby 1.9.x installed, other Rubies won't do.
+
   $ gem install elus
-  $ elus
+  $ elus 1
 
-... Follow the prompts
+... Each run of the script solves one game round. Follow the prompts. When prompted to 
+enter game pieces, use first letters of description, replacing G for Blue (because!).
+So, if you get a free piece "Big Blue Lozenge", enter BGL. For "Small Yellow Circle", 
+enter SYC and so on.
 
+  $ elus 2
+  $ elus 3
+  
 == Copyright
 
 Copyright (c) 2010 arvicco. See LICENSE for details.
